@@ -7,13 +7,6 @@ def afinizuj(coords):
 def vek_proiz(c1, c2):
 	return [c1[1]*c2[2]-c1[2]*c2[1], c1[2]*c2[0]-c1[0]*c2[2], c1[0]*c2[1]-c1[1]*c2[0]]
 
-# ~ def osmoteme(p1, p2, p3, p5, p6, p7, p8):
-	# ~ Xb = vek_proiz(vek_proiz(p2, p6), vek_proiz(p1, p5))
-	# ~ Yb = vek_proiz(vek_proiz(p5, p6), vek_proiz(p7, p8))
-	
-	# ~ p4 = vek_proiz(vek_proiz(p8, Xb), vek_proiz(p3, Yb))
-	
-	# ~ return [round(p / p4[-1]) for p in p4]
 	
 def osmoteme(p1, p2, p3, p5, p6, p7, p8):
 	
@@ -40,20 +33,6 @@ def osmoteme(p1, p2, p3, p5, p6, p7, p8):
 	
 	return [round(p / p4[-1]) for p in p4]
 	
-# ~ p1 = [595, 301, 1]
-# ~ p2 = [292, 517, 1]
-# ~ p3 = [157, 379, 1]
-# ~ p5 = [665, 116, 1]
-# ~ p6 = [304, 295, 1]
-# ~ p7 = [135, 163, 1]
-# ~ p8 = [509, 43, 1]
-
-# ~ print(osmoteme(p1, p2, p3, p5, p6, p7, p8))
-
-
-
-
-
 def click_event(event, x, y, flags, params):
 	if event == cv2.EVENT_LBUTTONDOWN:
 		global points
@@ -64,7 +43,7 @@ def click_event(event, x, y, flags, params):
 			cv2.circle(image, (x,y), radius=0, color=(255, 0, 0), thickness=6)
 			cv2.imshow('PPGR prvi domaci', image)
 			points.append([x, y, 1])
-			print(points)
+			print([x,y])
 		
 		elif len(points)==7:
 			x, y, _ = osmoteme(points[0], points[1], points[2], points[3], points[4], points[5], points[6])
@@ -72,9 +51,11 @@ def click_event(event, x, y, flags, params):
 			cv2.putText(image, ' ' + str(x) + ',' + str(y), (x,y), font, 1, (0, 255, 0), 2)
 			cv2.circle(image, (x,y), radius=0, color=(0, 255, 0), thickness=6)
 			cv2.imshow('PPGR prvi domaci', image)
+			points.append([x, y, 1])
+			print([x,y])
 
 
-path = 'cherry_pick.png'
+path = 'slika.jpeg'
 image = cv2.imread(path)
 window_name = 'PPGR prvi domaci'
 
