@@ -30,8 +30,11 @@ def svd(orig, img):
 def DLT(pts1, pts2):
 	
 	A = svd(pts1, pts2)
-	koef_norme = 1/A[-1]
 	
-	return A.reshape(3,3) * koef_norme
+	return A.reshape(3,3) / A[-1]
  
- 
+trapez = [[- 3, - 1, 1], [3, - 1, 1], [1, 1, 1], [- 1, 1, 1], [1,2,3], [-8,-2,1]] 
+pravougaonik1 = [[- 2, - 1, 1], [2, - 1, 1], [2, 1, 1], [- 2, 1, 1], [2,1,5], [-16,-5,5]]
+# ~ print(DLT(trapez, pravougaonik1))
+print(DLT(trapez, pravougaonik1))
+

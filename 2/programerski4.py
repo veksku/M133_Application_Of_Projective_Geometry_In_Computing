@@ -76,10 +76,9 @@ def DLTwithNormalization(origs, imgs):
 	Tp_inv = np.linalg.inv(Tp)
 	T_inv = np.linalg.inv(T)
 	
-	mat = np.matmul(Tp_inv, Pp)
-	mat = np.matmul(mat, T)
+	mat = Tp_inv @ Pp @ T
  
-	return mat * 1/mat[-1][-1]
+	return mat / mat[-1][-1]
 
 trapez = [[- 3, - 1, 1], [3, - 1, 1], [1, 1, 1], [- 1, 1, 1], [1,2,3], [-8,-2,1]] 
 pravougaonik1 = [[- 2, - 1, 1], [2, - 1, 1], [2, 1, 1], [- 2, 1, 1], [2,1,5], [-16,-5,5]]

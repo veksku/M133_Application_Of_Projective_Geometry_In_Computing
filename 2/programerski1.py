@@ -1,7 +1,7 @@
 import numpy as np
 np.set_printoptions(precision=5, suppress=True)
  
- # ovde pišete pomocne funkcije
+###################################################################
 
 def formiraj_matricu(A, B, C, alfa, beta, gama):
 	
@@ -32,7 +32,7 @@ def naivni(origs, imgs):
 	M1 = np.transpose([A, B, C])
 	alfa, beta, gama = np.linalg.solve(M1, D)
 	
-	if proveri_kolinearnost(alfa, beta, gama) == True:
+	if proveri_kolinearnost(alfa, beta, gama):
 		return "Losi originali!"
 	P1 = formiraj_matricu(A, B, C, alfa, beta, gama)
 	
@@ -40,7 +40,7 @@ def naivni(origs, imgs):
 	M2 = np.transpose([Ap, Bp, Cp])
 	alfap, betap, gamap = np.linalg.solve(M2, Dp)
 	
-	if proveri_kolinearnost(alfap, betap, gamap) == True:
+	if proveri_kolinearnost(alfap, betap, gamap):
 		return "Lose slike!"
 	P2 = formiraj_matricu(Ap, Bp, Cp, alfap, betap, gamap)
 	
@@ -52,6 +52,8 @@ def naivni(origs, imgs):
 	P = np.where(P ==0 , 0.0 , P)
 	
 	return P * 1/P[-1][-1]
+
+###################################################################
 
 trapez = [[- 3, - 1, 1], [3, - 1, 1], [1, 1, 1], [- 1, 1, 1]] 
 pravougaonik = [[- 2, - 1, 1], [2, - 1, 1], [2, 1, 1], [- 2, 1, 1]]
@@ -68,4 +70,3 @@ imgs = [[- 2, - 5, 1], [2, - 5, 1], [2, 1, 1], [6, -3, 3]]   #primetite da nisu 
 print(naivni(origs, imgs))
 # ~ resenje:
 # ~ Lose slike!
-print(naivni([[816, 37, 874], [13, 669, 501], [222, 430, 739], [1260, 897, 2352]], [[466, 985, 130], [724, 453, 166], [626, 294, 943], [157, 822, 136]]))
